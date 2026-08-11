@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>AI Tax & ITR Assistant</title>
 
     <style>
@@ -27,7 +26,6 @@
         }
 
         p {
-            text-align: center;
             color: #555;
         }
 
@@ -57,12 +55,17 @@
             font-size: 16px;
         }
 
+        button:disabled {
+            opacity: 0.6;
+        }
+
         #result {
             margin-top: 25px;
             padding: 15px;
             background: #f1f5f9;
             border-radius: 8px;
             display: none;
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -73,7 +76,10 @@
 
     <h1>AI Tax & ITR Assistant</h1>
 
-    <p>Prepare your ITR information with AI</p>
+    <p>
+        Enter your basic information to get an AI-generated
+        ITR preparation assessment.
+    </p>
 
     <label>Your Name</label>
     <input type="text" id="name" placeholder="Enter your name">
@@ -111,8 +117,8 @@
     <label>Other Income</label>
     <input type="number" id="otherIncome" placeholder="Example: 50000">
 
-    <button onclick="generateAssessment()">
-        Generate Assessment
+    <button id="generateBtn" onclick="generateAssessment()">
+        Generate AI Assessment
     </button>
 
     <div id="result"></div>
@@ -121,7 +127,7 @@
 
 <script>
 
-function generateAssessment() {
+async function generateAssessment() {
 
     const name = document.getElementById("name").value;
     const incomeType = document.getElementById("incomeType").value;
@@ -136,28 +142,89 @@ function generateAssessment() {
         return;
     }
 
+    const button = document.getElementById("generateBtn");
     const result = document.getElementById("result");
 
+    button.disabled = true;
+    button.innerText = "Generating AI Assessment...";
+
     result.style.display = "block";
+    result.innerHTML = "⏳ Please wait... AI is analyzing your information.";
 
-    result.innerHTML = `
-        <h3>Assessment Summary</h3>
+    const message = `
+You are an Indian tax and ITR preparation assistant.
 
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Income Type:</b> ${incomeType}</p>
-        <p><b>Annual Income:</b> ₹${income}</p>
-        <p><b>Home Loan:</b> ${homeLoan}</p>
-        <p><b>Health Insurance:</b> ${insurance}</p>
-        <p><b>Investments:</b> ${investment}</p>
-        <p><b>Other Income:</b> ₹${otherIncome || 0}</p>
+The user has provided the following information:
 
-        <hr>
+Name: ${name}
+Income Type: ${incomeType}
+Annual Income: ₹${income}
+Home Loan: ${homeLoan}
+Health Insurance: ${insurance}
+Investments: ${investment}
+Other Income: ₹${otherIncome || 0}
 
-        <p>
-        Your information has been collected successfully.
-        AI analysis will be added in the next step.
-        </p>
-    `;
+Provide a simple preliminary assessment.
+
+Include:
+1. Information summary
+2. Documents that may be required
+3. Additional information needed
+4. General tax-related considerations
+5. Recommended next steps
+
+Do not invent facts.
+Do not claim to be a Chartered Accountant.
+Do not present the response as final tax advice.
+If information is missing, clearly mention it.
+Use simple language.
+`;
+
+    try {
+
+        const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: message
+            })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Something went wrong");
+        }
+
+        result.innerHTML = `
+            <h3>🤖 AI Assessment</h3>
+            <div>${formatResponse(data.answer)}</div>
+        `;
+
+    } catch (error) {
+
+        result.innerHTML = `
+            <h3>❌ Error</h3>
+            <p>${error.message}</p>
+        `;
+
+    } finally {
+
+        button.disabled = false;
+        button.innerText = "Generate AI Assessment";
+
+    }
+}
+
+
+function formatResponse(text) {
+
+    return text
+        .replace(/\n/g, "<br>")
+        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+
 }
 
 </script>
