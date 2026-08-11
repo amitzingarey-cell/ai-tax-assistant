@@ -3,16 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Tax Assistant</title>
+
+    <title>AI Tax & ITR Assistant</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            color: #555;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 25px;
+            background: #111827;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        #result {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f1f5f9;
+            border-radius: 8px;
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
+
+<div class="container">
 
     <h1>AI Tax & ITR Assistant</h1>
 
     <p>Prepare your ITR information with AI</p>
 
-    <button>Start Assessment</button>
+    <label>Your Name</label>
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <label>Income Type</label>
+    <select id="incomeType">
+        <option value="">Select</option>
+        <option>Salary</option>
+        <option>Business</option>
+        <option>Profession</option>
+        <option>Other</option>
+    </select>
+
+    <label>Annual Income</label>
+    <input type="number" id="income" placeholder="Example: 800000">
+
+    <label>Home Loan</label>
+    <select id="homeLoan">
+        <option>No</option>
+        <option>Yes</option>
+    </select>
+
+    <label>Health Insurance</label>
+    <select id="insurance">
+        <option>No</option>
+        <option>Yes</option>
+    </select>
+
+    <label>Investments</label>
+    <select id="investment">
+        <option>No</option>
+        <option>Yes</option>
+    </select>
+
+    <label>Other Income</label>
+    <input type="number" id="otherIncome" placeholder="Example: 50000">
+
+    <button onclick="generateAssessment()">
+        Generate Assessment
+    </button>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+
+function generateAssessment() {
+
+    const name = document.getElementById("name").value;
+    const incomeType = document.getElementById("incomeType").value;
+    const income = document.getElementById("income").value;
+    const homeLoan = document.getElementById("homeLoan").value;
+    const insurance = document.getElementById("insurance").value;
+    const investment = document.getElementById("investment").value;
+    const otherIncome = document.getElementById("otherIncome").value;
+
+    if (!name || !incomeType || !income) {
+        alert("Please fill Name, Income Type and Annual Income.");
+        return;
+    }
+
+    const result = document.getElementById("result");
+
+    result.style.display = "block";
+
+    result.innerHTML = `
+        <h3>Assessment Summary</h3>
+
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Income Type:</b> ${incomeType}</p>
+        <p><b>Annual Income:</b> ₹${income}</p>
+        <p><b>Home Loan:</b> ${homeLoan}</p>
+        <p><b>Health Insurance:</b> ${insurance}</p>
+        <p><b>Investments:</b> ${investment}</p>
+        <p><b>Other Income:</b> ₹${otherIncome || 0}</p>
+
+        <hr>
+
+        <p>
+        Your information has been collected successfully.
+        AI analysis will be added in the next step.
+        </p>
+    `;
+}
+
+</script>
 
 </body>
 </html>
