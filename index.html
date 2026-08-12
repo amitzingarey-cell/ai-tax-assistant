@@ -2,123 +2,133 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AI Tax & ITR Assistant</title>
+<meta charset="UTF-8">
 
-    <style>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-        * {
-            box-sizing: border-box;
-        }
+<title>AI Tax & ITR Assistant</title>
 
-        body {
-            margin: 0;
-            padding: 20px;
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
-            color: #111827;
-        }
+<style>
 
-        .container {
-            max-width: 550px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
+* {
+    box-sizing: border-box;
+}
 
-        h1 {
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 30px;
-        }
+body {
+    margin: 0;
+    padding: 15px;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+    color: #111827;
+}
 
-        .intro {
-            color: #555;
-            font-size: 17px;
-            line-height: 1.5;
-            margin-bottom: 25px;
-        }
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
 
-        label {
-            display: block;
-            margin-top: 18px;
-            font-weight: bold;
-            font-size: 17px;
-        }
+h1 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
 
-        input,
-        select {
-            width: 100%;
-            padding: 14px;
-            margin-top: 8px;
-            border: 1px solid #ccc;
-            border-radius: 9px;
-            font-size: 16px;
-            background: white;
-        }
+.intro {
+    color: #555;
+    line-height: 1.5;
+    font-size: 16px;
+}
 
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: #111827;
-        }
+label {
+    display: block;
+    margin-top: 18px;
+    font-weight: bold;
+    font-size: 16px;
+}
 
-        button {
-            width: 100%;
-            padding: 15px;
-            margin-top: 28px;
-            border: none;
-            border-radius: 9px;
-            background: #111827;
-            color: white;
-            font-size: 17px;
-            cursor: pointer;
-        }
+input,
+select {
+    width: 100%;
+    padding: 14px;
+    margin-top: 8px;
+    border: 1px solid #ccc;
+    border-radius: 9px;
+    font-size: 16px;
+}
 
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
+button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 25px;
+    border: none;
+    border-radius: 9px;
+    background: #111827;
+    color: white;
+    font-size: 17px;
+    cursor: pointer;
+}
 
-        #result {
-            display: none;
-            margin-top: 25px;
-            padding: 20px;
-            background: #f1f5f9;
-            border-radius: 12px;
-            line-height: 1.7;
-            font-size: 16px;
-        }
+button:disabled {
+    opacity: 0.6;
+}
 
-        #result h3 {
-            margin-top: 0;
-            font-size: 22px;
-        }
+.result {
+    display: none;
+    margin-top: 25px;
+    padding: 20px;
+    background: #eef2f7;
+    border-radius: 12px;
+}
 
-        #result h4 {
-            margin-bottom: 8px;
-            margin-top: 22px;
-        }
+.info-box {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
 
-        .info-box {
-            background: white;
-            padding: 15px;
-            border-radius: 9px;
-            margin-top: 10px;
-        }
+.regime-box {
+    background: white;
+    padding: 18px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
 
-        .disclaimer {
-            margin-top: 20px;
-            font-size: 13px;
-            color: #666;
-            line-height: 1.5;
-        }
+.tax-number {
+    font-size: 24px;
+    font-weight: bold;
+}
 
-    </style>
+.recommendation {
+    margin-top: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #e5e7eb;
+    font-weight: bold;
+}
+
+.disclaimer {
+    margin-top: 25px;
+    font-size: 13px;
+    color: #666;
+    line-height: 1.5;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+}
+
+</style>
 
 </head>
 
@@ -126,200 +136,407 @@
 
 <div class="container">
 
-    <h1>AI Tax & ITR Assistant</h1>
+<h1>AI Tax & ITR Assistant</h1>
 
-    <p class="intro">
-        Enter your basic information to get an
-        AI-generated preliminary ITR preparation assessment.
-    </p>
-
-
-    <!-- NAME -->
-
-    <label for="name">
-        Your Name
-    </label>
-
-    <input
-        type="text"
-        id="name"
-        placeholder="Enter your name"
-    >
+<p class="intro">
+Enter your information to compare estimated tax under
+the Old Tax Regime and New Tax Regime for AY 2026-27.
+</p>
 
 
-    <!-- INCOME TYPE -->
+<label>Your Name</label>
 
-    <label for="incomeType">
-        Income Type
-    </label>
-
-    <select id="incomeType">
-
-        <option value="">
-            Select
-        </option>
-
-        <option value="Salary">
-            Salary
-        </option>
-
-        <option value="Business">
-            Business
-        </option>
-
-        <option value="Profession">
-            Profession
-        </option>
-
-        <option value="Other">
-            Other
-        </option>
-
-    </select>
+<input
+    type="text"
+    id="name"
+    placeholder="Enter your name"
+>
 
 
-    <!-- ANNUAL INCOME -->
+<label>Age</label>
 
-    <label for="income">
-        Annual Income
-    </label>
-
-    <input
-        type="number"
-        id="income"
-        placeholder="Example: 800000"
-        inputmode="numeric"
-    >
+<input
+    type="number"
+    id="age"
+    placeholder="Example: 35"
+>
 
 
-    <!-- HOME LOAN -->
+<label>Income Type</label>
 
-    <label for="homeLoan">
-        Home Loan
-    </label>
+<select id="incomeType">
 
-    <select id="homeLoan">
+<option value="Salary">
+Salary
+</option>
 
-        <option value="No">
-            No
-        </option>
+<option value="Business">
+Business
+</option>
 
-        <option value="Yes">
-            Yes
-        </option>
+<option value="Profession">
+Profession
+</option>
 
-    </select>
+<option value="Other">
+Other
+</option>
 
-
-    <!-- HEALTH INSURANCE -->
-
-    <label for="insurance">
-        Health Insurance
-    </label>
-
-    <select id="insurance">
-
-        <option value="No">
-            No
-        </option>
-
-        <option value="Yes">
-            Yes
-        </option>
-
-    </select>
+</select>
 
 
-    <!-- INVESTMENTS -->
+<label>Annual Income</label>
 
-    <label for="investment">
-        Investments
-    </label>
-
-    <select id="investment">
-
-        <option value="No">
-            No
-        </option>
-
-        <option value="Yes">
-            Yes
-        </option>
-
-    </select>
+<input
+    type="number"
+    id="income"
+    placeholder="Example: 1200000"
+>
 
 
-    <!-- OTHER INCOME -->
+<label>Other Income</label>
 
-    <label for="otherIncome">
-        Other Income
-    </label>
-
-    <input
-        type="number"
-        id="otherIncome"
-        placeholder="Example: 50000"
-        inputmode="numeric"
-    >
+<input
+    type="number"
+    id="otherIncome"
+    placeholder="Example: 50000"
+    value="0"
+>
 
 
-    <!-- BUTTON -->
+<label>Home Loan Interest Paid</label>
 
-    <button
-        id="generateBtn"
-        onclick="generateAssessment()"
-    >
-        Generate AI Assessment
-    </button>
-
-
-    <!-- RESULT -->
-
-    <div id="result"></div>
+<input
+    type="number"
+    id="homeLoanInterest"
+    placeholder="Example: 150000"
+    value="0"
+>
 
 
-    <div class="disclaimer">
+<label>80C Investments</label>
 
-        <strong>Disclaimer:</strong>
-        This AI Tax & ITR Assistant provides preliminary
-        information for educational purposes only.
-        It is not a substitute for professional tax advice
-        from a qualified tax professional.
+<input
+    type="number"
+    id="investment80C"
+    placeholder="Example: 150000"
+    value="0"
+>
 
-    </div>
+
+<label>Health Insurance Premium (80D)</label>
+
+<input
+    type="number"
+    id="healthInsurance"
+    placeholder="Example: 25000"
+    value="0"
+>
+
+
+<label>NPS Contribution - 80CCD(1B)</label>
+
+<input
+    type="number"
+    id="nps"
+    placeholder="Example: 50000"
+    value="0"
+>
+
+
+<button
+    id="calculateBtn"
+    onclick="calculateTax()"
+>
+Compare Old vs New Regime
+</button>
+
+
+<div
+    id="result"
+    class="result"
+></div>
+
+
+<div class="disclaimer">
+
+<strong>Disclaimer:</strong>
+
+This calculator provides an estimated comparison
+for informational purposes only. Actual tax liability
+may differ depending on your complete income,
+deductions, exemptions, special-rate income,
+capital gains, surcharge, marginal relief and other
+applicable provisions. Please verify the result with
+the Income Tax Department or a qualified tax professional.
+
+</div>
 
 </div>
 
 
 <script>
 
-async function generateAssessment() {
 
-    // Get values from form
+/* ================================
+   BASIC HELPERS
+================================ */
+
+function getNumber(id) {
+
+    const value =
+        Number(document.getElementById(id).value);
+
+    if (isNaN(value) || value < 0) {
+        return 0;
+    }
+
+    return value;
+}
+
+
+function money(value) {
+
+    return "₹" +
+        Math.round(value).toLocaleString("en-IN");
+
+}
+
+
+function taxSlabOld(income, age) {
+
+    let tax = 0;
+
+
+    /*
+       Old regime slabs for AY 2026-27
+
+       Below 60:
+       0 - 2.5L = Nil
+       2.5L - 5L = 5%
+       5L - 10L = 20%
+       Above 10L = 30%
+    */
+
+    if (age < 60) {
+
+        if (income <= 250000) {
+
+            tax = 0;
+
+        }
+
+        else if (income <= 500000) {
+
+            tax =
+                (income - 250000) * 0.05;
+
+        }
+
+        else if (income <= 1000000) {
+
+            tax =
+                12500 +
+                (income - 500000) * 0.20;
+
+        }
+
+        else {
+
+            tax =
+                112500 +
+                (income - 1000000) * 0.30;
+
+        }
+
+    }
+
+
+    /*
+       Senior citizen 60-79
+    */
+
+    else if (age < 80) {
+
+        if (income <= 300000) {
+
+            tax = 0;
+
+        }
+
+        else if (income <= 500000) {
+
+            tax =
+                (income - 300000) * 0.05;
+
+        }
+
+        else if (income <= 1000000) {
+
+            tax =
+                10000 +
+                (income - 500000) * 0.20;
+
+        }
+
+        else {
+
+            tax =
+                110000 +
+                (income - 1000000) * 0.30;
+
+        }
+
+    }
+
+
+    /*
+       Super senior citizen 80+
+    */
+
+    else {
+
+        if (income <= 500000) {
+
+            tax = 0;
+
+        }
+
+        else if (income <= 1000000) {
+
+            tax =
+                (income - 500000) * 0.20;
+
+        }
+
+        else {
+
+            tax =
+                100000 +
+                (income - 1000000) * 0.30;
+
+        }
+
+    }
+
+
+    return tax;
+}
+
+
+
+function taxSlabNew(income) {
+
+    let tax = 0;
+
+
+    if (income <= 400000) {
+
+        tax = 0;
+
+    }
+
+    else if (income <= 800000) {
+
+        tax =
+            (income - 400000) * 0.05;
+
+    }
+
+    else if (income <= 1200000) {
+
+        tax =
+            20000 +
+            (income - 800000) * 0.10;
+
+    }
+
+    else if (income <= 1600000) {
+
+        tax =
+            60000 +
+            (income - 1200000) * 0.15;
+
+    }
+
+    else if (income <= 2000000) {
+
+        tax =
+            120000 +
+            (income - 1600000) * 0.20;
+
+    }
+
+    else if (income <= 2400000) {
+
+        tax =
+            200000 +
+            (income - 2000000) * 0.25;
+
+    }
+
+    else {
+
+        tax =
+            300000 +
+            (income - 2400000) * 0.30;
+
+    }
+
+
+    return tax;
+}
+
+
+
+/* ================================
+   CALCULATE TAX
+================================ */
+
+async function calculateTax() {
+
 
     const name =
-        document.getElementById("name").value.trim();
+        document.getElementById("name")
+        .value.trim();
+
+
+    const age =
+        getNumber("age");
+
 
     const incomeType =
-        document.getElementById("incomeType").value;
+        document.getElementById("incomeType")
+        .value;
 
-    const income =
-        document.getElementById("income").value;
 
-    const homeLoan =
-        document.getElementById("homeLoan").value;
+    const salaryIncome =
+        getNumber("income");
 
-    const insurance =
-        document.getElementById("insurance").value;
-
-    const investment =
-        document.getElementById("investment").value;
 
     const otherIncome =
-        document.getElementById("otherIncome").value;
+        getNumber("otherIncome");
 
 
-    // Validation
+    const homeLoanInterest =
+        getNumber("homeLoanInterest");
+
+
+    const investment80C =
+        getNumber("investment80C");
+
+
+    const healthInsurance =
+        getNumber("healthInsurance");
+
+
+    const nps =
+        getNumber("nps");
+
+
+    const result =
+        document.getElementById("result");
+
 
     if (!name) {
 
@@ -329,15 +546,15 @@ async function generateAssessment() {
     }
 
 
-    if (!incomeType) {
+    if (!age) {
 
-        alert("Please select your income type.");
+        alert("Please enter your age.");
 
         return;
     }
 
 
-    if (!income) {
+    if (!salaryIncome) {
 
         alert("Please enter your annual income.");
 
@@ -345,199 +562,447 @@ async function generateAssessment() {
     }
 
 
-    // Get button and result box
+    /*
+       Gross income
+    */
 
-    const button =
-        document.getElementById("generateBtn");
-
-    const result =
-        document.getElementById("result");
-
-
-    // Disable button
-
-    button.disabled = true;
-
-    button.innerText =
-        "Generating AI Assessment...";
+    const grossIncome =
+        salaryIncome +
+        otherIncome;
 
 
-    // Show loading
-
-    result.style.display = "block";
-
-    result.innerHTML = `
-        <h3>🤖 AI Assessment</h3>
-
-        <p>
-            ⏳ Please wait...
-            AI is analyzing your information.
-        </p>
-    `;
+    /*
+       ============================
+       OLD REGIME
+       ============================
+    */
 
 
-    try {
+    let oldStandardDeduction = 0;
 
-        // Send exact user information
-        // to Vercel backend
 
-        const response = await fetch(
-            "/api/chat",
-            {
-                method: "POST",
+    if (incomeType === "Salary") {
 
-                headers: {
-                    "Content-Type": "application/json"
-                },
+        oldStandardDeduction = 50000;
 
-                body: JSON.stringify({
+    }
 
-                    incomeType: incomeType,
 
-                    income: income,
+    /*
+       80C maximum considered:
+       ₹1,50,000
+    */
 
-                    homeLoan: homeLoan,
-
-                    insurance: insurance,
-
-                    investment: investment,
-
-                    otherIncome:
-                        otherIncome || "0"
-
-                })
-            }
+    const deduction80C =
+        Math.min(
+            investment80C,
+            150000
         );
 
 
-        // Convert response to JSON
+    /*
+       80D basic self/family limit
+       ₹25,000 normally
+       ₹50,000 if taxpayer is senior citizen
+    */
+
+    let deduction80DLimit =
+        age >= 60 ? 50000 : 25000;
+
+
+    const deduction80D =
+        Math.min(
+            healthInsurance,
+            deduction80DLimit
+        );
+
+
+    /*
+       NPS 80CCD(1B)
+       maximum ₹50,000
+    */
+
+    const deductionNPS =
+        Math.min(
+            nps,
+            50000
+        );
+
+
+    /*
+       Home loan interest
+       self-occupied property assumption
+       maximum ₹2,00,000 under old regime
+    */
+
+    const deductionHomeLoan =
+        Math.min(
+            homeLoanInterest,
+            200000
+        );
+
+
+    const oldTotalDeductions =
+        oldStandardDeduction +
+        deduction80C +
+        deduction80D +
+        deductionNPS +
+        deductionHomeLoan;
+
+
+    const oldTaxableIncome =
+        Math.max(
+            0,
+            grossIncome -
+            oldTotalDeductions
+        );
+
+
+    let oldTax =
+        taxSlabOld(
+            oldTaxableIncome,
+            age
+        );
+
+
+    /*
+       87A old regime rebate
+       maximum ₹12,500 if taxable income
+       does not exceed ₹5 lakh
+    */
+
+    if (oldTaxableIncome <= 500000) {
+
+        oldTax =
+            Math.max(
+                0,
+                oldTax - 12500
+            );
+
+    }
+
+
+    /*
+       4% Health & Education Cess
+    */
+
+    oldTax =
+        oldTax * 1.04;
+
+
+
+    /*
+       ============================
+       NEW REGIME
+       ============================
+    */
+
+
+    let newStandardDeduction = 0;
+
+
+    if (incomeType === "Salary") {
+
+        newStandardDeduction = 75000;
+
+    }
+
+
+    /*
+       Most deductions above are NOT
+       used in this simplified new-regime
+       comparison.
+    */
+
+    const newTaxableIncome =
+        Math.max(
+            0,
+            grossIncome -
+            newStandardDeduction
+        );
+
+
+    let newTax =
+        taxSlabNew(
+            newTaxableIncome
+        );
+
+
+    /*
+       New regime 87A rebate:
+       up to ₹60,000 when total income
+       does not exceed ₹12 lakh.
+    */
+
+    if (newTaxableIncome <= 1200000) {
+
+        newTax =
+            Math.max(
+                0,
+                newTax - 60000
+            );
+
+    }
+
+
+    /*
+       4% cess
+    */
+
+    newTax =
+        newTax * 1.04;
+
+
+
+    /*
+       Difference
+    */
+
+    const difference =
+        Math.abs(
+            oldTax - newTax
+        );
+
+
+    let recommendation = "";
+
+
+    if (oldTax < newTax) {
+
+        recommendation =
+            "Old Tax Regime appears lower based on the information entered.";
+
+    }
+
+    else if (newTax < oldTax) {
+
+        recommendation =
+            "New Tax Regime appears lower based on the information entered.";
+
+    }
+
+    else {
+
+        recommendation =
+            "Both regimes have approximately the same estimated tax.";
+
+    }
+
+
+
+    /* ================================
+       DISPLAY RESULT
+    ================================= */
+
+    result.style.display = "block";
+
+
+    result.innerHTML = `
+
+        <h2>
+            🧮 Tax Comparison
+        </h2>
+
+
+        <div class="info-box">
+
+            <p>
+                <strong>Name:</strong>
+                ${escapeHTML(name)}
+            </p>
+
+            <p>
+                <strong>Income Type:</strong>
+                ${escapeHTML(incomeType)}
+            </p>
+
+            <p>
+                <strong>Age:</strong>
+                ${age}
+            </p>
+
+            <p>
+                <strong>Gross Income:</strong>
+                ${money(grossIncome)}
+            </p>
+
+        </div>
+
+
+        <div class="regime-box">
+
+            <h3>
+                🔵 Old Tax Regime
+            </h3>
+
+            <p>
+                Estimated Taxable Income:
+                <strong>
+                    ${money(oldTaxableIncome)}
+                </strong>
+            </p>
+
+            <p class="tax-number">
+                ${money(oldTax)}
+            </p>
+
+            <p>
+                Estimated tax including 4% cess.
+            </p>
+
+        </div>
+
+
+        <div class="regime-box">
+
+            <h3>
+                🟢 New Tax Regime
+            </h3>
+
+            <p>
+                Estimated Taxable Income:
+                <strong>
+                    ${money(newTaxableIncome)}
+                </strong>
+            </p>
+
+            <p class="tax-number">
+                ${money(newTax)}
+            </p>
+
+            <p>
+                Estimated tax including 4% cess.
+            </p>
+
+        </div>
+
+
+        <div class="recommendation">
+
+            💡 Recommendation
+
+            <br><br>
+
+            ${recommendation}
+
+            <br><br>
+
+            Approximate difference:
+            ${money(difference)}
+
+        </div>
+
+
+        <hr>
+
+
+        <h3>
+            🤖 AI Tax Guidance
+        </h3>
+
+
+        <div id="aiResult">
+
+            ⏳ Generating additional guidance...
+
+        </div>
+
+    `;
+
+
+    /*
+       Send information to Gemini
+       only for explanation/guidance.
+    */
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/chat",
+                {
+
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        incomeType:
+                            incomeType,
+
+                        income:
+                            salaryIncome,
+
+                        homeLoan:
+                            homeLoanInterest > 0
+                                ? "Yes"
+                                : "No",
+
+                        insurance:
+                            healthInsurance > 0
+                                ? "Yes"
+                                : "No",
+
+                        investment:
+                            investment80C > 0
+                                ? "Yes"
+                                : "No",
+
+                        otherIncome:
+                            otherIncome
+
+                    })
+
+                }
+            );
+
 
         const data =
             await response.json();
 
 
-        // Handle error
-
         if (!response.ok) {
 
             throw new Error(
                 data.error ||
-                "Something went wrong."
+                "AI request failed."
             );
 
         }
 
 
-        // Format exact numbers entered by user
-
-        const formattedIncome =
-            Number(income).toLocaleString("en-IN");
-
-
-        const formattedOtherIncome =
-            Number(otherIncome || 0)
-            .toLocaleString("en-IN");
-
-
-        // Display result
-
-        result.innerHTML = `
-
-            <h3>
-                🤖 AI Tax Assessment
-            </h3>
-
-
-            <h4>
-                📋 Your Information
-            </h4>
-
-
-            <div class="info-box">
-
-                <p>
-                    <strong>Name:</strong>
-                    ${escapeHTML(name)}
-                </p>
-
-                <p>
-                    <strong>Income Type:</strong>
-                    ${escapeHTML(incomeType)}
-                </p>
-
-                <p>
-                    <strong>Annual Income:</strong>
-                    ₹${formattedIncome}
-                </p>
-
-                <p>
-                    <strong>Home Loan:</strong>
-                    ${escapeHTML(homeLoan)}
-                </p>
-
-                <p>
-                    <strong>Health Insurance:</strong>
-                    ${escapeHTML(insurance)}
-                </p>
-
-                <p>
-                    <strong>Investments:</strong>
-                    ${escapeHTML(investment)}
-                </p>
-
-                <p>
-                    <strong>Other Income:</strong>
-                    ₹${formattedOtherIncome}
-                </p>
-
-            </div>
-
-
-            <h4>
-                🤖 AI Guidance
-            </h4>
-
-            <div>
-                ${formatResponse(data.answer)}
-            </div>
-
-        `;
+        document.getElementById(
+            "aiResult"
+        ).innerHTML =
+            formatResponse(
+                data.answer
+            );
 
     }
 
     catch (error) {
 
-        result.style.display = "block";
-
-        result.innerHTML = `
-
-            <h3>
-                ❌ Error
-            </h3>
-
+        document.getElementById(
+            "aiResult"
+        ).innerHTML = `
             <p>
-                ${escapeHTML(error.message)}
+                AI guidance unavailable.
             </p>
-
         `;
-
-    }
-
-    finally {
-
-        button.disabled = false;
-
-        button.innerText =
-            "Generate AI Assessment";
 
     }
 
 }
 
 
-/*
-    Convert AI text into readable HTML
-*/
+
+/* ================================
+   FORMAT AI RESPONSE
+================================ */
 
 function formatResponse(text) {
 
@@ -549,12 +1014,10 @@ function formatResponse(text) {
 
 
     return escapeHTML(text)
-
         .replace(
             /\*\*(.*?)\*\*/g,
             "<strong>$1</strong>"
         )
-
         .replace(
             /\n/g,
             "<br>"
@@ -563,10 +1026,10 @@ function formatResponse(text) {
 }
 
 
-/*
-    Security:
-    Prevent user/AI text from inserting HTML
-*/
+
+/* ================================
+   SECURITY
+================================ */
 
 function escapeHTML(text) {
 
