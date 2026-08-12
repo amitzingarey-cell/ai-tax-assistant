@@ -1,73 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>AI Tax & ITR Assistant</title>
 
     <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f4f6f8;
             margin: 0;
             padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            color: #111827;
         }
 
         .container {
-            max-width: 500px;
+            max-width: 550px;
             margin: auto;
             background: white;
             padding: 25px;
-            border-radius: 15px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
         }
 
         h1 {
             text-align: center;
+            margin-bottom: 15px;
+            font-size: 30px;
         }
 
-        p {
+        .intro {
             color: #555;
+            font-size: 17px;
+            line-height: 1.5;
+            margin-bottom: 25px;
         }
 
         label {
             display: block;
-            margin-top: 15px;
+            margin-top: 18px;
             font-weight: bold;
+            font-size: 17px;
         }
 
-        input, select {
+        input,
+        select {
             width: 100%;
-            padding: 12px;
-            margin-top: 7px;
-            box-sizing: border-box;
+            padding: 14px;
+            margin-top: 8px;
             border: 1px solid #ccc;
-            border-radius: 8px;
+            border-radius: 9px;
+            font-size: 16px;
+            background: white;
+        }
+
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: #111827;
         }
 
         button {
             width: 100%;
-            padding: 14px;
-            margin-top: 25px;
+            padding: 15px;
+            margin-top: 28px;
+            border: none;
+            border-radius: 9px;
             background: #111827;
             color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            font-size: 17px;
+            cursor: pointer;
         }
 
         button:disabled {
             opacity: 0.6;
+            cursor: not-allowed;
         }
 
         #result {
-            margin-top: 25px;
-            padding: 15px;
-            background: #f1f5f9;
-            border-radius: 8px;
             display: none;
-            line-height: 1.6;
+            margin-top: 25px;
+            padding: 20px;
+            background: #f1f5f9;
+            border-radius: 12px;
+            line-height: 1.7;
+            font-size: 16px;
         }
+
+        #result h3 {
+            margin-top: 0;
+            font-size: 22px;
+        }
+
+        #result h4 {
+            margin-bottom: 8px;
+            margin-top: 22px;
+        }
+
+        .info-box {
+            background: white;
+            padding: 15px;
+            border-radius: 9px;
+            margin-top: 10px;
+        }
+
+        .disclaimer {
+            margin-top: 20px;
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
     </style>
+
 </head>
 
 <body>
@@ -76,158 +128,479 @@
 
     <h1>AI Tax & ITR Assistant</h1>
 
-    <p>
-        Enter your basic information to get an AI-generated
-        ITR preparation assessment.
+    <p class="intro">
+        Enter your basic information to get an
+        AI-generated preliminary ITR preparation assessment.
     </p>
 
-    <label>Your Name</label>
-    <input type="text" id="name" placeholder="Enter your name">
 
-    <label>Income Type</label>
+    <!-- NAME -->
+
+    <label for="name">
+        Your Name
+    </label>
+
+    <input
+        type="text"
+        id="name"
+        placeholder="Enter your name"
+    >
+
+
+    <!-- INCOME TYPE -->
+
+    <label for="incomeType">
+        Income Type
+    </label>
+
     <select id="incomeType">
-        <option value="">Select</option>
-        <option>Salary</option>
-        <option>Business</option>
-        <option>Profession</option>
-        <option>Other</option>
+
+        <option value="">
+            Select
+        </option>
+
+        <option value="Salary">
+            Salary
+        </option>
+
+        <option value="Business">
+            Business
+        </option>
+
+        <option value="Profession">
+            Profession
+        </option>
+
+        <option value="Other">
+            Other
+        </option>
+
     </select>
 
-    <label>Annual Income</label>
-    <input type="number" id="income" placeholder="Example: 800000">
 
-    <label>Home Loan</label>
+    <!-- ANNUAL INCOME -->
+
+    <label for="income">
+        Annual Income
+    </label>
+
+    <input
+        type="number"
+        id="income"
+        placeholder="Example: 800000"
+        inputmode="numeric"
+    >
+
+
+    <!-- HOME LOAN -->
+
+    <label for="homeLoan">
+        Home Loan
+    </label>
+
     <select id="homeLoan">
-        <option>No</option>
-        <option>Yes</option>
+
+        <option value="No">
+            No
+        </option>
+
+        <option value="Yes">
+            Yes
+        </option>
+
     </select>
 
-    <label>Health Insurance</label>
+
+    <!-- HEALTH INSURANCE -->
+
+    <label for="insurance">
+        Health Insurance
+    </label>
+
     <select id="insurance">
-        <option>No</option>
-        <option>Yes</option>
+
+        <option value="No">
+            No
+        </option>
+
+        <option value="Yes">
+            Yes
+        </option>
+
     </select>
 
-    <label>Investments</label>
+
+    <!-- INVESTMENTS -->
+
+    <label for="investment">
+        Investments
+    </label>
+
     <select id="investment">
-        <option>No</option>
-        <option>Yes</option>
+
+        <option value="No">
+            No
+        </option>
+
+        <option value="Yes">
+            Yes
+        </option>
+
     </select>
 
-    <label>Other Income</label>
-    <input type="number" id="otherIncome" placeholder="Example: 50000">
 
-    <button id="generateBtn" onclick="generateAssessment()">
+    <!-- OTHER INCOME -->
+
+    <label for="otherIncome">
+        Other Income
+    </label>
+
+    <input
+        type="number"
+        id="otherIncome"
+        placeholder="Example: 50000"
+        inputmode="numeric"
+    >
+
+
+    <!-- BUTTON -->
+
+    <button
+        id="generateBtn"
+        onclick="generateAssessment()"
+    >
         Generate AI Assessment
     </button>
 
+
+    <!-- RESULT -->
+
     <div id="result"></div>
 
+
+    <div class="disclaimer">
+
+        <strong>Disclaimer:</strong>
+        This AI Tax & ITR Assistant provides preliminary
+        information for educational purposes only.
+        It is not a substitute for professional tax advice
+        from a qualified tax professional.
+
+    </div>
+
 </div>
+
 
 <script>
 
 async function generateAssessment() {
 
-    const name = document.getElementById("name").value;
-    const incomeType = document.getElementById("incomeType").value;
-    const income = document.getElementById("income").value;
-    const homeLoan = document.getElementById("homeLoan").value;
-    const insurance = document.getElementById("insurance").value;
-    const investment = document.getElementById("investment").value;
-    const otherIncome = document.getElementById("otherIncome").value;
+    // Get values from form
 
-    if (!name || !incomeType || !income) {
-        alert("Please fill Name, Income Type and Annual Income.");
+    const name =
+        document.getElementById("name").value.trim();
+
+    const incomeType =
+        document.getElementById("incomeType").value;
+
+    const income =
+        document.getElementById("income").value;
+
+    const homeLoan =
+        document.getElementById("homeLoan").value;
+
+    const insurance =
+        document.getElementById("insurance").value;
+
+    const investment =
+        document.getElementById("investment").value;
+
+    const otherIncome =
+        document.getElementById("otherIncome").value;
+
+
+    // Validation
+
+    if (!name) {
+
+        alert("Please enter your name.");
+
         return;
     }
 
-    const button = document.getElementById("generateBtn");
-    const result = document.getElementById("result");
+
+    if (!incomeType) {
+
+        alert("Please select your income type.");
+
+        return;
+    }
+
+
+    if (!income) {
+
+        alert("Please enter your annual income.");
+
+        return;
+    }
+
+
+    // Get button and result box
+
+    const button =
+        document.getElementById("generateBtn");
+
+    const result =
+        document.getElementById("result");
+
+
+    // Disable button
 
     button.disabled = true;
-    button.innerText = "Generating AI Assessment...";
+
+    button.innerText =
+        "Generating AI Assessment...";
+
+
+    // Show loading
 
     result.style.display = "block";
-    result.innerHTML = "⏳ Please wait... AI is analyzing your information.";
 
-    const message = `
-You are an Indian tax and ITR preparation assistant.
+    result.innerHTML = `
+        <h3>🤖 AI Assessment</h3>
 
-The user has provided the following information:
+        <p>
+            ⏳ Please wait...
+            AI is analyzing your information.
+        </p>
+    `;
 
-Name: ${name}
-Income Type: ${incomeType}
-Annual Income: ₹${income}
-Home Loan: ${homeLoan}
-Health Insurance: ${insurance}
-Investments: ${investment}
-Other Income: ₹${otherIncome || 0}
-
-Provide a simple preliminary assessment.
-
-Include:
-1. Information summary
-2. Documents that may be required
-3. Additional information needed
-4. General tax-related considerations
-5. Recommended next steps
-
-Do not invent facts.
-Do not claim to be a Chartered Accountant.
-Do not present the response as final tax advice.
-If information is missing, clearly mention it.
-Use simple language.
-`;
 
     try {
 
-        const response = await fetch("/api/chat", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                message: message
-            })
-        });
+        // Send exact user information
+        // to Vercel backend
 
-        const data = await response.json();
+        const response = await fetch(
+            "/api/chat",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    incomeType: incomeType,
+
+                    income: income,
+
+                    homeLoan: homeLoan,
+
+                    insurance: insurance,
+
+                    investment: investment,
+
+                    otherIncome:
+                        otherIncome || "0"
+
+                })
+            }
+        );
+
+
+        // Convert response to JSON
+
+        const data =
+            await response.json();
+
+
+        // Handle error
 
         if (!response.ok) {
-            throw new Error(data.error || "Something went wrong");
+
+            throw new Error(
+                data.error ||
+                "Something went wrong."
+            );
+
         }
 
+
+        // Format exact numbers entered by user
+
+        const formattedIncome =
+            Number(income).toLocaleString("en-IN");
+
+
+        const formattedOtherIncome =
+            Number(otherIncome || 0)
+            .toLocaleString("en-IN");
+
+
+        // Display result
+
         result.innerHTML = `
-            <h3>🤖 AI Assessment</h3>
-            <div>${formatResponse(data.answer)}</div>
+
+            <h3>
+                🤖 AI Tax Assessment
+            </h3>
+
+
+            <h4>
+                📋 Your Information
+            </h4>
+
+
+            <div class="info-box">
+
+                <p>
+                    <strong>Name:</strong>
+                    ${escapeHTML(name)}
+                </p>
+
+                <p>
+                    <strong>Income Type:</strong>
+                    ${escapeHTML(incomeType)}
+                </p>
+
+                <p>
+                    <strong>Annual Income:</strong>
+                    ₹${formattedIncome}
+                </p>
+
+                <p>
+                    <strong>Home Loan:</strong>
+                    ${escapeHTML(homeLoan)}
+                </p>
+
+                <p>
+                    <strong>Health Insurance:</strong>
+                    ${escapeHTML(insurance)}
+                </p>
+
+                <p>
+                    <strong>Investments:</strong>
+                    ${escapeHTML(investment)}
+                </p>
+
+                <p>
+                    <strong>Other Income:</strong>
+                    ₹${formattedOtherIncome}
+                </p>
+
+            </div>
+
+
+            <h4>
+                🤖 AI Guidance
+            </h4>
+
+            <div>
+                ${formatResponse(data.answer)}
+            </div>
+
         `;
-
-    } catch (error) {
-
-        result.innerHTML = `
-            <h3>❌ Error</h3>
-            <p>${error.message}</p>
-        `;
-
-    } finally {
-
-        button.disabled = false;
-        button.innerText = "Generate AI Assessment";
 
     }
+
+    catch (error) {
+
+        result.style.display = "block";
+
+        result.innerHTML = `
+
+            <h3>
+                ❌ Error
+            </h3>
+
+            <p>
+                ${escapeHTML(error.message)}
+            </p>
+
+        `;
+
+    }
+
+    finally {
+
+        button.disabled = false;
+
+        button.innerText =
+            "Generate AI Assessment";
+
+    }
+
 }
 
 
+/*
+    Convert AI text into readable HTML
+*/
+
 function formatResponse(text) {
 
-    return text
-        .replace(/\n/g, "<br>")
-        .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+    if (!text) {
+
+        return "No AI response received.";
+
+    }
+
+
+    return escapeHTML(text)
+
+        .replace(
+            /\*\*(.*?)\*\*/g,
+            "<strong>$1</strong>"
+        )
+
+        .replace(
+            /\n/g,
+            "<br>"
+        );
+
+}
+
+
+/*
+    Security:
+    Prevent user/AI text from inserting HTML
+*/
+
+function escapeHTML(text) {
+
+    return String(text)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
 }
 
 </script>
 
 </body>
+
 </html>
