@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
-
-<title>AI Tax & ITR Assistant</title>
+<title>AI Tax & ITR Assistant - AY 2026-27</title>
 
 <style>
-
 * {
     box-sizing: border-box;
 }
@@ -22,253 +15,532 @@ body {
     margin: 0;
     padding: 15px;
     font-family: Arial, sans-serif;
-    background: #f4f6f8;
+    background: #f3f6fa;
     color: #111827;
 }
 
 .container {
-    max-width: 600px;
+    max-width: 720px;
     margin: auto;
-    background: white;
-    padding: 25px;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    background: #fff;
+    padding: 22px;
+    border-radius: 18px;
+    box-shadow: 0 5px 25px rgba(0,0,0,.08);
 }
 
 h1 {
     text-align: center;
-    font-size: 30px;
-    margin-bottom: 10px;
+    margin: 0;
+    font-size: 28px;
 }
 
-.intro {
-    color: #555;
-    line-height: 1.5;
-    font-size: 16px;
+.subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 22px;
+}
+
+.section {
+    margin-top: 22px;
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #fafafa;
+}
+
+.section h2 {
+    margin-top: 0;
+    font-size: 19px;
 }
 
 label {
     display: block;
-    margin-top: 18px;
-    font-weight: bold;
-    font-size: 16px;
+    margin-top: 14px;
+    font-weight: 600;
 }
 
 input,
 select {
     width: 100%;
-    padding: 14px;
-    margin-top: 8px;
-    border: 1px solid #ccc;
+    padding: 13px;
+    margin-top: 7px;
+    border: 1px solid #cbd5e1;
     border-radius: 9px;
     font-size: 16px;
+    background: white;
 }
 
 button {
     width: 100%;
     padding: 15px;
-    margin-top: 25px;
-    border: none;
-    border-radius: 9px;
+    margin-top: 20px;
+    border: 0;
+    border-radius: 10px;
     background: #111827;
     color: white;
     font-size: 17px;
+    font-weight: bold;
     cursor: pointer;
 }
 
 button:disabled {
-    opacity: 0.6;
+    opacity: .6;
+}
+
+.secondary {
+    background: #475569;
+}
+
+.hidden {
+    display: none;
 }
 
 .result {
-    display: none;
-    margin-top: 25px;
-    padding: 20px;
-    background: #eef2f7;
+    margin-top: 24px;
+}
+
+.card {
+    background: #f8fafc;
+    padding: 16px;
+    margin-top: 12px;
     border-radius: 12px;
-}
-
-.info-box {
-    background: white;
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 10px;
-}
-
-.regime-box {
-    background: white;
-    padding: 18px;
-    border-radius: 10px;
-    margin-top: 15px;
+    border: 1px solid #e2e8f0;
 }
 
 .tax-number {
-    font-size: 24px;
+    font-size: 25px;
     font-weight: bold;
 }
 
-.recommendation {
-    margin-top: 15px;
-    padding: 15px;
-    border-radius: 10px;
-    background: #e5e7eb;
-    font-weight: bold;
+.good {
+    background: #ecfdf5;
+    border-color: #a7f3d0;
+}
+
+.warning {
+    background: #fffbeb;
+    border-color: #fde68a;
+}
+
+.error {
+    background: #fef2f2;
+    border-color: #fecaca;
+}
+
+.summary-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.summary-table td {
+    padding: 9px 5px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.summary-table td:last-child {
+    text-align: right;
+    font-weight: 600;
+}
+
+small {
+    color: #64748b;
 }
 
 .disclaimer {
     margin-top: 25px;
-    font-size: 13px;
-    color: #666;
-    line-height: 1.5;
+    font-size: 12px;
+    color: #64748b;
+    line-height: 1.6;
 }
 
-hr {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 20px 0;
+.loading {
+    text-align: center;
+    padding: 15px;
 }
-
 </style>
-
 </head>
 
 <body>
 
 <div class="container">
 
-<h1>AI Tax & ITR Assistant</h1>
+<h1>🤖 AI Tax & ITR Assistant</h1>
 
-<p class="intro">
-Enter your information to compare estimated tax under
-the Old Tax Regime and New Tax Regime for AY 2026-27.
+<p class="subtitle">
+AY 2026-27 • Tax Computation • ITR Guidance
 </p>
 
 
-<label>Your Name</label>
+<!-- PERSONAL INFORMATION -->
 
-<input
-    type="text"
-    id="name"
-    placeholder="Enter your name"
->
+<div class="section">
 
+<h2>👤 Personal Information</h2>
+
+<label>Name</label>
+<input id="name" type="text" placeholder="Enter your name">
 
 <label>Age</label>
+<input id="age" type="number" placeholder="Example: 35">
+
+<label>Taxpayer Type</label>
+<select id="taxpayerType">
+
+<option value="Individual">Individual</option>
+<option value="HUF">HUF</option>
+<option value="Firm">Firm / LLP</option>
+<option value="Company">Company</option>
+<option value="Trust">Trust / Institution</option>
+
+</select>
+
+<label>Residential Status</label>
+<select id="residentialStatus">
+
+<option value="Resident">Resident</option>
+<option value="RNOR">RNOR</option>
+<option value="NRI">NRI</option>
+
+</select>
+
+</div>
+
+
+<!-- SALARY -->
+
+<div class="section">
+
+<h2>💼 Salary Income</h2>
+
+<label>
+Gross Salary
+</label>
 
 <input
+    id="salaryIncome"
     type="number"
-    id="age"
-    placeholder="Example: 35"
+    value="0"
+    placeholder="Example: 1200000"
 >
 
+<label>
+Income from Salary? 
+</label>
 
-<label>Income Type</label>
+<select id="hasSalary">
 
-<select id="incomeType">
+<option value="yes">Yes</option>
+<option value="no">No</option>
 
-<option value="Salary">
-Salary
+</select>
+
+</div>
+
+
+<!-- HOUSE PROPERTY -->
+
+<div class="section">
+
+<h2>🏠 House Property</h2>
+
+<label>House Property?</label>
+
+<select id="hasHouseProperty"
+        onchange="toggleHouseProperty()">
+
+<option value="no">No</option>
+<option value="yes">Yes</option>
+
+</select>
+
+<div id="housePropertyFields" class="hidden">
+
+<label>Property Type</label>
+
+<select id="propertyType">
+
+<option value="SELF_OCCUPIED">
+Self Occupied
 </option>
 
-<option value="Business">
-Business
-</option>
-
-<option value="Profession">
-Profession
-</option>
-
-<option value="Other">
-Other
+<option value="LET_OUT">
+Let Out
 </option>
 
 </select>
 
-
-<label>Annual Income</label>
-
-<input
-    type="number"
-    id="income"
-    placeholder="Example: 1200000"
->
-
-
-<label>Other Income</label>
+<label>Rent Received</label>
 
 <input
+    id="rentReceived"
     type="number"
-    id="otherIncome"
-    placeholder="Example: 50000"
     value="0"
 >
 
-
-<label>Home Loan Interest Paid</label>
+<label>Municipal Tax</label>
 
 <input
+    id="municipalTax"
     type="number"
+    value="0"
+>
+
+<label>Home Loan Interest</label>
+
+<input
     id="homeLoanInterest"
-    placeholder="Example: 150000"
+    type="number"
     value="0"
 >
 
+</div>
 
-<label>80C Investments</label>
+</div>
+
+
+<!-- BUSINESS -->
+
+<div class="section">
+
+<h2>📊 Business / Profession</h2>
+
+<label>Business / Profession Income?</label>
+
+<select id="hasBusiness"
+        onchange="toggleBusiness()">
+
+<option value="no">No</option>
+<option value="yes">Yes</option>
+
+</select>
+
+<div id="businessFields" class="hidden">
+
+<label>Business Method</label>
+
+<select id="businessMethod">
+
+<option value="NORMAL">
+Normal Business
+</option>
+
+<option value="44AD">
+44AD Presumptive Business
+</option>
+
+<option value="44ADA">
+44ADA Presumptive Profession
+</option>
+
+<option value="44AE">
+44AE Goods Carriage
+</option>
+
+</select>
+
+<label>Digital / Qualifying Receipts</label>
 
 <input
+    id="digitalReceipts"
     type="number"
-    id="investment80C"
-    placeholder="Example: 150000"
     value="0"
 >
 
-
-<label>Health Insurance Premium (80D)</label>
+<label>Other / Cash Receipts</label>
 
 <input
+    id="otherReceipts"
     type="number"
-    id="healthInsurance"
-    placeholder="Example: 25000"
     value="0"
 >
 
-
-<label>NPS Contribution - 80CCD(1B)</label>
+<label>Business Expenses</label>
 
 <input
+    id="businessExpenses"
     type="number"
-    id="nps"
+    value="0"
+>
+
+</div>
+
+</div>
+
+
+<!-- CAPITAL GAINS -->
+
+<div class="section">
+
+<h2>📈 Capital Gains</h2>
+
+<label>Capital Gains?</label>
+
+<select id="hasCapitalGains"
+        onchange="toggleCapitalGains()">
+
+<option value="no">No</option>
+<option value="yes">Yes</option>
+
+</select>
+
+<div id="capitalGainFields" class="hidden">
+
+<label>Short-Term Capital Gain</label>
+
+<input
+    id="shortTermCapitalGain"
+    type="number"
+    value="0"
+>
+
+<label>Long-Term Capital Gain</label>
+
+<input
+    id="longTermCapitalGain"
+    type="number"
+    value="0"
+>
+
+<label>Asset Type</label>
+
+<select id="assetType">
+
+<option value="">
+Select
+</option>
+
+<option value="Equity">
+Equity / Shares
+</option>
+
+<option value="MutualFund">
+Mutual Fund
+</option>
+
+<option value="Property">
+Immovable Property
+</option>
+
+<option value="Other">
+Other Asset
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<!-- OTHER INCOME -->
+
+<div class="section">
+
+<h2>💰 Other Income</h2>
+
+<label>Interest / Other Income</label>
+
+<input
+    id="otherIncome"
+    type="number"
+    value="0"
     placeholder="Example: 50000"
+>
+
+<label>Special-Rate Income?</label>
+
+<select id="hasSpecialRateIncome">
+
+<option value="no">No</option>
+<option value="yes">Yes</option>
+
+</select>
+
+</div>
+
+
+<!-- DEDUCTIONS -->
+
+<div class="section">
+
+<h2>🧾 Deductions</h2>
+
+<label>80C Investment</label>
+
+<input
+    id="section80C"
+    type="number"
+    value="0"
+    placeholder="Example: 150000"
+>
+
+<label>80D Health Insurance</label>
+
+<input
+    id="section80D"
+    type="number"
     value="0"
 >
+
+<label>80CCD(1B) NPS</label>
+
+<input
+    id="section80CCD1B"
+    type="number"
+    value="0"
+    placeholder="Maximum normally considered: ₹50,000"
+>
+
+</div>
+
+
+<!-- REGIME -->
+
+<div class="section">
+
+<h2>⚖️ Tax Regime</h2>
+
+<label>Preferred Regime</label>
+
+<select id="regime">
+
+<option value="Compare">
+Compare Old vs New
+</option>
+
+<option value="Old">
+Old Regime
+</option>
+
+<option value="New">
+New Regime
+</option>
+
+</select>
+
+</div>
 
 
 <button
     id="calculateBtn"
     onclick="calculateTax()"
 >
-Compare Old vs New Regime
+🧮 Calculate Tax & Select ITR
 </button>
 
 
-<div
-    id="result"
-    class="result"
-></div>
+<div id="result" class="result"></div>
 
 
 <div class="disclaimer">
 
-<strong>Disclaimer:</strong>
-
-This calculator provides an estimated comparison
-for informational purposes only. Actual tax liability
-may differ depending on your complete income,
-deductions, exemptions, special-rate income,
-capital gains, surcharge, marginal relief and other
-applicable provisions. Please verify the result with
-the Income Tax Department or a qualified tax professional.
+<strong>Important:</strong>
+This application provides preliminary tax computation,
+ITR selection and AI guidance for informational purposes.
+It does not replace the official Income Tax Department
+utility, statutory forms, professional advice or final
+government validation.
 
 </div>
 
@@ -277,17 +549,26 @@ the Income Tax Department or a qualified tax professional.
 
 <script>
 
-
-/* ================================
+/* =====================================================
    BASIC HELPERS
-================================ */
+===================================================== */
 
-function getNumber(id) {
+function num(id) {
+
+    const element =
+        document.getElementById(id);
+
+    if (!element) {
+        return 0;
+    }
 
     const value =
-        Number(document.getElementById(id).value);
+        Number(element.value);
 
-    if (isNaN(value) || value < 0) {
+    if (
+        !Number.isFinite(value) ||
+        value < 0
+    ) {
         return 0;
     }
 
@@ -295,625 +576,1242 @@ function getNumber(id) {
 }
 
 
-function money(value) {
+function selected(id) {
 
-    return "₹" +
-        Math.round(value).toLocaleString("en-IN");
+    const element =
+        document.getElementById(id);
 
+    return element
+        ? element.value
+        : "";
 }
 
 
-function taxSlabOld(income, age) {
+function money(value) {
+
+    return "₹" +
+        Math.round(
+            Number(value) || 0
+        ).toLocaleString("en-IN");
+}
+
+
+function escapeHTML(text) {
+
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* =====================================================
+   UI TOGGLES
+===================================================== */
+
+function toggleHouseProperty() {
+
+    document
+        .getElementById("housePropertyFields")
+        .classList.toggle(
+            "hidden",
+            selected("hasHouseProperty") !== "yes"
+        );
+}
+
+
+function toggleBusiness() {
+
+    document
+        .getElementById("businessFields")
+        .classList.toggle(
+            "hidden",
+            selected("hasBusiness") !== "yes"
+        );
+}
+
+
+function toggleCapitalGains() {
+
+    document
+        .getElementById("capitalGainFields")
+        .classList.toggle(
+            "hidden",
+            selected("hasCapitalGains") !== "yes"
+        );
+}
+
+
+/* =====================================================
+   OLD REGIME
+===================================================== */
+
+function oldRegimeTax(income, age) {
 
     let tax = 0;
-
-
-    /*
-       Old regime slabs for AY 2026-27
-
-       Below 60:
-       0 - 2.5L = Nil
-       2.5L - 5L = 5%
-       5L - 10L = 20%
-       Above 10L = 30%
-    */
 
     if (age < 60) {
 
         if (income <= 250000) {
-
             tax = 0;
-
         }
-
         else if (income <= 500000) {
-
             tax =
-                (income - 250000) * 0.05;
-
+                (income - 250000) * .05;
         }
-
         else if (income <= 1000000) {
-
             tax =
                 12500 +
-                (income - 500000) * 0.20;
-
+                (income - 500000) * .20;
         }
-
         else {
-
             tax =
                 112500 +
-                (income - 1000000) * 0.30;
-
+                (income - 1000000) * .30;
         }
 
-    }
-
-
-    /*
-       Senior citizen 60-79
-    */
-
-    else if (age < 80) {
+    } else if (age < 80) {
 
         if (income <= 300000) {
-
             tax = 0;
-
         }
-
         else if (income <= 500000) {
-
             tax =
-                (income - 300000) * 0.05;
-
+                (income - 300000) * .05;
         }
-
         else if (income <= 1000000) {
-
             tax =
                 10000 +
-                (income - 500000) * 0.20;
-
+                (income - 500000) * .20;
         }
-
         else {
-
             tax =
                 110000 +
-                (income - 1000000) * 0.30;
-
+                (income - 1000000) * .30;
         }
 
-    }
-
-
-    /*
-       Super senior citizen 80+
-    */
-
-    else {
+    } else {
 
         if (income <= 500000) {
-
             tax = 0;
-
         }
-
         else if (income <= 1000000) {
-
             tax =
-                (income - 500000) * 0.20;
-
+                (income - 500000) * .20;
         }
-
         else {
-
             tax =
                 100000 +
-                (income - 1000000) * 0.30;
-
+                (income - 1000000) * .30;
         }
-
     }
-
 
     return tax;
 }
 
 
+/* =====================================================
+   NEW REGIME
+===================================================== */
 
-function taxSlabNew(income) {
+function newRegimeTax(income) {
 
     let tax = 0;
 
-
     if (income <= 400000) {
-
         tax = 0;
-
     }
-
     else if (income <= 800000) {
-
         tax =
-            (income - 400000) * 0.05;
-
+            (income - 400000) * .05;
     }
-
     else if (income <= 1200000) {
-
         tax =
             20000 +
-            (income - 800000) * 0.10;
-
+            (income - 800000) * .10;
     }
-
     else if (income <= 1600000) {
-
         tax =
             60000 +
-            (income - 1200000) * 0.15;
-
+            (income - 1200000) * .15;
     }
-
     else if (income <= 2000000) {
-
         tax =
             120000 +
-            (income - 1600000) * 0.20;
-
+            (income - 1600000) * .20;
     }
-
     else if (income <= 2400000) {
-
         tax =
             200000 +
-            (income - 2000000) * 0.25;
-
+            (income - 2000000) * .25;
     }
-
     else {
-
         tax =
             300000 +
-            (income - 2400000) * 0.30;
-
+            (income - 2400000) * .30;
     }
-
 
     return tax;
 }
 
 
+/* =====================================================
+   CESS
+===================================================== */
 
-/* ================================
-   CALCULATE TAX
-================================ */
+function addCess(tax) {
 
-async function calculateTax() {
-
-
-    const name =
-        document.getElementById("name")
-        .value.trim();
+    return tax * 1.04;
+}
 
 
-    const age =
-        getNumber("age");
+/* =====================================================
+   TAX COMPUTATION
+===================================================== */
 
+function calculateTax() {
 
-    const incomeType =
-        document.getElementById("incomeType")
-        .value;
-
-
-    const salaryIncome =
-        getNumber("income");
-
-
-    const otherIncome =
-        getNumber("otherIncome");
-
-
-    const homeLoanInterest =
-        getNumber("homeLoanInterest");
-
-
-    const investment80C =
-        getNumber("investment80C");
-
-
-    const healthInsurance =
-        getNumber("healthInsurance");
-
-
-    const nps =
-        getNumber("nps");
-
-
-    const result =
-        document.getElementById("result");
-
-
-    if (!name) {
-
-        alert("Please enter your name.");
-
-        return;
-    }
-
-
-    if (!age) {
-
-        alert("Please enter your age.");
-
-        return;
-    }
-
-
-    if (!salaryIncome) {
-
-        alert("Please enter your annual income.");
-
-        return;
-    }
-
-
-    /*
-       Gross income
-    */
-
-    const grossIncome =
-        salaryIncome +
-        otherIncome;
-
-
-    /*
-       ============================
-       OLD REGIME
-       ============================
-    */
-
-
-    let oldStandardDeduction = 0;
-
-
-    if (incomeType === "Salary") {
-
-        oldStandardDeduction = 50000;
-
-    }
-
-
-    /*
-       80C maximum considered:
-       ₹1,50,000
-    */
-
-    const deduction80C =
-        Math.min(
-            investment80C,
-            150000
+    const btn =
+        document.getElementById(
+            "calculateBtn"
         );
 
+    btn.disabled = true;
 
-    /*
-       80D basic self/family limit
-       ₹25,000 normally
-       ₹50,000 if taxpayer is senior citizen
-    */
+    try {
 
-    let deduction80DLimit =
-        age >= 60 ? 50000 : 25000;
+        const name =
+            selected("name").trim();
 
+        const age =
+            num("age");
 
-    const deduction80D =
-        Math.min(
-            healthInsurance,
-            deduction80DLimit
-        );
+        if (!name) {
+            alert("Please enter your name.");
+            return;
+        }
 
-
-    /*
-       NPS 80CCD(1B)
-       maximum ₹50,000
-    */
-
-    const deductionNPS =
-        Math.min(
-            nps,
-            50000
-        );
+        if (!age) {
+            alert("Please enter your age.");
+            return;
+        }
 
 
-    /*
-       Home loan interest
-       self-occupied property assumption
-       maximum ₹2,00,000 under old regime
-    */
+        const taxpayerType =
+            selected("taxpayerType");
 
-    const deductionHomeLoan =
-        Math.min(
-            homeLoanInterest,
-            200000
-        );
+        const residentialStatus =
+            selected("residentialStatus");
 
 
-    const oldTotalDeductions =
-        oldStandardDeduction +
-        deduction80C +
-        deduction80D +
-        deductionNPS +
-        deductionHomeLoan;
+        const salary =
+            num("salaryIncome");
+
+        const otherIncome =
+            num("otherIncome");
 
 
-    const oldTaxableIncome =
-        Math.max(
-            0,
-            grossIncome -
-            oldTotalDeductions
-        );
+        const houseProperty =
+            selected(
+                "hasHouseProperty"
+            ) === "yes";
 
 
-    let oldTax =
-        taxSlabOld(
-            oldTaxableIncome,
-            age
-        );
+        const rent =
+            num("rentReceived");
 
 
-    /*
-       87A old regime rebate
-       maximum ₹12,500 if taxable income
-       does not exceed ₹5 lakh
-    */
+        const municipalTax =
+            num("municipalTax");
 
-    if (oldTaxableIncome <= 500000) {
+
+        const homeLoanInterest =
+            num("homeLoanInterest");
+
+
+        let housePropertyIncome = 0;
+
+
+        if (houseProperty) {
+
+            const propertyType =
+                selected("propertyType");
+
+            if (
+                propertyType ===
+                "SELF_OCCUPIED"
+            ) {
+
+                housePropertyIncome =
+                    -Math.min(
+                        homeLoanInterest,
+                        200000
+                    );
+
+            } else {
+
+                const netRent =
+                    Math.max(
+                        0,
+                        rent -
+                        municipalTax
+                    );
+
+                const standardDeduction =
+                    netRent * .30;
+
+                housePropertyIncome =
+                    netRent -
+                    standardDeduction -
+                    homeLoanInterest;
+            }
+        }
+
+
+        /* =================================================
+           BUSINESS
+        ================================================= */
+
+        const hasBusiness =
+            selected("hasBusiness")
+            === "yes";
+
+
+        const businessMethod =
+            selected("businessMethod");
+
+
+        const digitalReceipts =
+            num("digitalReceipts");
+
+
+        const otherReceipts =
+            num("otherReceipts");
+
+
+        const businessExpenses =
+            num("businessExpenses");
+
+
+        let businessIncome = 0;
+
+
+        if (hasBusiness) {
+
+            const totalReceipts =
+                digitalReceipts +
+                otherReceipts;
+
+
+            if (
+                businessMethod ===
+                "44AD"
+            ) {
+
+                businessIncome =
+                    digitalReceipts * .06 +
+                    otherReceipts * .08;
+
+            }
+
+            else if (
+                businessMethod ===
+                "44ADA"
+            ) {
+
+                businessIncome =
+                    totalReceipts * .50;
+
+            }
+
+            else {
+
+                businessIncome =
+                    totalReceipts -
+                    businessExpenses;
+            }
+        }
+
+
+        /* =================================================
+           CAPITAL GAINS
+        ================================================= */
+
+        const hasCapitalGains =
+            selected("hasCapitalGains")
+            === "yes";
+
+
+        const stcg =
+            num(
+                "shortTermCapitalGain"
+            );
+
+
+        const ltcg =
+            num(
+                "longTermCapitalGain"
+            );
+
+
+        /*
+          Capital gains are displayed separately.
+          They are NOT simply added to normal slab
+          income for the final tax calculation.
+        */
+
+        const normalCapitalGain =
+            hasCapitalGains
+                ? stcg + ltcg
+                : 0;
+
+
+        /* =================================================
+           NORMAL INCOME
+        ================================================= */
+
+        const normalIncome =
+            Math.max(
+                0,
+                salary +
+                otherIncome +
+                housePropertyIncome +
+                businessIncome
+            );
+
+
+        /* =================================================
+           DEDUCTIONS
+        ================================================= */
+
+        const section80C =
+            Math.min(
+                num("section80C"),
+                150000
+            );
+
+
+        const section80D =
+            Math.min(
+                num("section80D"),
+                age >= 60
+                    ? 50000
+                    : 25000
+            );
+
+
+        const section80CCD1B =
+            Math.min(
+                num("section80CCD1B"),
+                50000
+            );
+
+
+        const oldStandardDeduction =
+            salary > 0
+                ? 50000
+                : 0;
+
+
+        const newStandardDeduction =
+            salary > 0
+                ? 75000
+                : 0;
+
+
+        const oldDeductions =
+            oldStandardDeduction +
+            section80C +
+            section80D +
+            section80CCD1B;
+
+
+        const oldTaxable =
+            Math.max(
+                0,
+                normalIncome -
+                oldDeductions
+            );
+
+
+        const newTaxable =
+            Math.max(
+                0,
+                normalIncome -
+                newStandardDeduction
+            );
+
+
+        /* =================================================
+           OLD TAX
+        ================================================= */
+
+        let oldTax =
+            oldRegimeTax(
+                oldTaxable,
+                age
+            );
+
+
+        /*
+          87A rebate.
+          Final calculation must also consider
+          special-rate income and rebate rules.
+        */
+
+        if (
+            oldTaxable <= 500000
+        ) {
+
+            oldTax =
+                Math.max(
+                    0,
+                    oldTax - 12500
+                );
+        }
+
 
         oldTax =
-            Math.max(
-                0,
-                oldTax - 12500
+            addCess(oldTax);
+
+
+        /* =================================================
+           NEW TAX
+        ================================================= */
+
+        let newTax =
+            newRegimeTax(
+                newTaxable
             );
 
-    }
 
+        if (
+            newTaxable <= 1200000
+        ) {
 
-    /*
-       4% Health & Education Cess
-    */
+            newTax =
+                Math.max(
+                    0,
+                    newTax - 60000
+                );
+        }
 
-    oldTax =
-        oldTax * 1.04;
-
-
-
-    /*
-       ============================
-       NEW REGIME
-       ============================
-    */
-
-
-    let newStandardDeduction = 0;
-
-
-    if (incomeType === "Salary") {
-
-        newStandardDeduction = 75000;
-
-    }
-
-
-    /*
-       Most deductions above are NOT
-       used in this simplified new-regime
-       comparison.
-    */
-
-    const newTaxableIncome =
-        Math.max(
-            0,
-            grossIncome -
-            newStandardDeduction
-        );
-
-
-    let newTax =
-        taxSlabNew(
-            newTaxableIncome
-        );
-
-
-    /*
-       New regime 87A rebate:
-       up to ₹60,000 when total income
-       does not exceed ₹12 lakh.
-    */
-
-    if (newTaxableIncome <= 1200000) {
 
         newTax =
-            Math.max(
-                0,
-                newTax - 60000
+            addCess(newTax);
+
+
+        /* =================================================
+           ITR SELECTION
+        ================================================= */
+
+        const preliminaryData = {
+
+            taxpayerType,
+
+            residentialStatus,
+
+            totalIncome:
+                normalIncome +
+                normalCapitalGain,
+
+            hasBusinessIncome:
+                hasBusiness,
+
+            hasProfessionalIncome:
+                hasBusiness &&
+                businessMethod === "44ADA",
+
+            businessIncome,
+
+            professionIncome:
+                businessMethod === "44ADA"
+                    ? businessIncome
+                    : 0,
+
+            hasCapitalGains,
+
+            shortTermCapitalGain:
+                stcg,
+
+            longTermCapitalGain:
+                ltcg,
+
+            hasForeignIncome: false,
+
+            hasForeignAssets: false,
+
+            hasUnlistedShares: false,
+
+            isDirectorInCompany: false,
+
+            businessMethod
+        };
+
+
+        const itr =
+            selectITRLocal(
+                preliminaryData
             );
+
+
+        /* =================================================
+           VALIDATION
+        ================================================= */
+
+        const validationData = {
+
+            taxpayerType,
+
+            residentialStatus,
+
+            salaryIncome:
+                salary,
+
+            businessIncome,
+
+            professionIncome:
+                businessMethod === "44ADA"
+                    ? businessIncome
+                    : 0,
+
+            hasBusinessIncome:
+                hasBusiness,
+
+            hasProfessionalIncome:
+                businessMethod === "44ADA",
+
+            businessMethod,
+
+            digitalReceipts,
+
+            otherReceipts,
+
+            cashReceipts:
+                otherReceipts,
+
+            hasCapitalGains,
+
+            capitalGain:
+                normalCapitalGain,
+
+            shortTermCapitalGain:
+                stcg,
+
+            longTermCapitalGain:
+                ltcg,
+
+            assetType:
+                selected("assetType"),
+
+            hasHouseProperty:
+                houseProperty,
+
+            propertyType:
+                selected("propertyType"),
+
+            rentReceived:
+                rent,
+
+            municipalTax,
+
+            homeLoanInterest,
+
+            totalIncome:
+                normalIncome +
+                normalCapitalGain,
+
+            deductions: {
+
+                section80C,
+
+                section80D,
+
+                section80CCD1B
+            },
+
+            regime:
+                selected("regime") === "Compare"
+                    ? "Old"
+                    : selected("regime"),
+
+            itr:
+                itr.form
+        };
+
+
+        const validation =
+            validateLocal(
+                validationData
+            );
+
+
+        /* =================================================
+           RECOMMENDATION
+        ================================================= */
+
+        let recommendation;
+
+        if (
+            oldTax < newTax
+        ) {
+
+            recommendation =
+                "Old Tax Regime appears lower based on the information entered.";
+
+        } else if (
+            newTax < oldTax
+        ) {
+
+            recommendation =
+                "New Tax Regime appears lower based on the information entered.";
+
+        } else {
+
+            recommendation =
+                "Both regimes produce approximately the same estimated tax.";
+        }
+
+
+        /* =================================================
+           DISPLAY
+        ================================================= */
+
+        const result =
+            document.getElementById(
+                "result"
+            );
+
+
+        result.innerHTML = `
+
+            <div class="card">
+
+                <h2>
+                    📋 Computation Summary
+                </h2>
+
+                <table class="summary-table">
+
+                    <tr>
+                        <td>Name</td>
+                        <td>
+                            ${escapeHTML(name)}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Taxpayer</td>
+                        <td>
+                            ${escapeHTML(
+                                taxpayerType
+                            )}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Residential Status</td>
+                        <td>
+                            ${escapeHTML(
+                                residentialStatus
+                            )}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Normal Income</td>
+                        <td>
+                            ${money(normalIncome)}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>STCG</td>
+                        <td>
+                            ${money(stcg)}
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>LTCG</td>
+                        <td>
+                            ${money(ltcg)}
+                        </td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>🔵 Old Tax Regime</h2>
+
+                <p>
+                    Taxable normal income:
+                    <strong>
+                        ${money(oldTaxable)}
+                    </strong>
+                </p>
+
+                <p class="tax-number">
+                    ${money(oldTax)}
+                </p>
+
+                <small>
+                    Preliminary estimate including cess.
+                </small>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>🟢 New Tax Regime</h2>
+
+                <p>
+                    Taxable normal income:
+                    <strong>
+                        ${money(newTaxable)}
+                    </strong>
+                </p>
+
+                <p class="tax-number">
+                    ${money(newTax)}
+                </p>
+
+                <small>
+                    Preliminary estimate including cess.
+                </small>
+
+            </div>
+
+
+            <div class="card good">
+
+                <h2>💡 Regime Recommendation</h2>
+
+                <p>
+                    ${recommendation}
+                </p>
+
+                <p>
+                    Approximate difference:
+                    <strong>
+                        ${money(
+                            Math.abs(
+                                oldTax -
+                                newTax
+                            )
+                        )}
+                    </strong>
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>📝 Preliminary ITR Selection</h2>
+
+                <p class="tax-number">
+                    ${escapeHTML(
+                        itr.form
+                    )}
+                </p>
+
+                <p>
+                    ${escapeHTML(
+                        itr.reason
+                    )}
+                </p>
+
+                <small>
+                    This is preliminary applicability
+                    logic and requires final verification.
+                </small>
+
+            </div>
+
+
+            <div class="card ${
+                validation.status === "ERROR"
+                    ? "error"
+                    : validation.status === "WARNING"
+                        ? "warning"
+                        : "good"
+            }">
+
+                <h2>
+                    ${
+                        validation.status === "ERROR"
+                            ? "❌ Validation"
+                            : validation.status === "WARNING"
+                                ? "⚠️ Validation"
+                                : "✅ Validation"
+                    }
+                </h2>
+
+                <p>
+                    ${escapeHTML(
+                        validation.message
+                    )}
+                </p>
+
+                ${
+                    validation.errors.length
+                        ? `
+                            <h3>Errors</h3>
+                            <ul>
+                                ${validation.errors.map(
+                                    e =>
+                                    `<li>${escapeHTML(e)}</li>`
+                                ).join("")}
+                            </ul>
+                        `
+                        : ""
+                }
+
+                ${
+                    validation.warnings.length
+                        ? `
+                            <h3>Warnings</h3>
+                            <ul>
+                                ${validation.warnings.map(
+                                    w =>
+                                    `<li>${escapeHTML(w)}</li>`
+                                ).join("")}
+                            </ul>
+                        `
+                        : ""
+                }
+
+            </div>
+
+
+            <div class="card">
+
+                <h2>🤖 AI Tax Guidance</h2>
+
+                <div id="aiResult">
+                    <div class="loading">
+                        AI guidance generate हो रही है...
+                    </div>
+                </div>
+
+            </div>
+        `;
+
+
+        result.scrollIntoView({
+            behavior: "smooth"
+        });
+
+
+        /*
+          Gemini request
+        */
+
+        requestAI(
+            {
+                name,
+                age,
+                taxpayerType,
+                residentialStatus,
+                salary,
+                otherIncome,
+                housePropertyIncome,
+                businessIncome,
+                stcg,
+                ltcg,
+                oldTaxable,
+                newTaxable,
+                oldTax,
+                newTax,
+                itr: itr.form,
+                recommendation
+            }
+        );
 
     }
 
+    finally {
 
-    /*
-       4% cess
-    */
-
-    newTax =
-        newTax * 1.04;
+        btn.disabled = false;
+    }
+}
 
 
+/* =====================================================
+   LOCAL ITR SELECTOR
+===================================================== */
 
-    /*
-       Difference
-    */
+function selectITRLocal(data) {
 
-    const difference =
-        Math.abs(
-            oldTax - newTax
+    const hasBusiness =
+        data.hasBusinessIncome ||
+        data.hasProfessionalIncome;
+
+
+    const hasCapitalGains =
+        data.hasCapitalGains;
+
+
+    if (
+        data.taxpayerType ===
+        "Company"
+    ) {
+
+        return {
+            form: "ITR-6",
+            reason:
+                "Company taxpayer detected."
+        };
+    }
+
+
+    if (
+        data.taxpayerType ===
+        "Firm" ||
+        data.taxpayerType ===
+        "LLP"
+    ) {
+
+        return {
+            form: "ITR-5",
+            reason:
+                "Firm/LLP taxpayer detected."
+        };
+    }
+
+
+    if (
+        data.taxpayerType ===
+        "Trust"
+    ) {
+
+        return {
+            form: "ITR-7",
+            reason:
+                "Trust/institution taxpayer detected."
+        };
+    }
+
+
+    if (hasBusiness) {
+
+        if (
+            data.businessMethod ===
+            "44AD" ||
+            data.businessMethod ===
+            "44ADA" ||
+            data.businessMethod ===
+            "44AE"
+        ) {
+
+            return {
+                form: "ITR-4",
+                reason:
+                    "Presumptive business/profession income detected; ITR-4 requires detailed eligibility verification."
+            };
+        }
+
+
+        return {
+            form: "ITR-3",
+            reason:
+                "Business/profession income detected."
+        };
+    }
+
+
+    if (
+        hasCapitalGains ||
+        data.residentialStatus === "NRI" ||
+        data.residentialStatus === "RNOR"
+    ) {
+
+        return {
+            form: "ITR-2",
+            reason:
+                "Capital gains or special residential status detected."
+        };
+    }
+
+
+    return {
+        form: "ITR-1",
+        reason:
+            "Basic individual income profile detected."
+    };
+}
+
+
+/* =====================================================
+   LOCAL VALIDATION
+===================================================== */
+
+function validateLocal(data) {
+
+    const errors = [];
+    const warnings = [];
+
+
+    if (
+        data.hasBusinessIncome &&
+        !data.businessMethod
+    ) {
+
+        errors.push(
+            "Business/profession method is missing."
+        );
+    }
+
+
+    if (
+        data.hasCapitalGains &&
+        !data.assetType
+    ) {
+
+        warnings.push(
+            "Capital gain asset type is not selected."
+        );
+    }
+
+
+    if (
+        data.regime === "New" &&
+        data.deductions
+    ) {
+
+        if (
+            data.deductions.section80C > 0
+        ) {
+
+            warnings.push(
+                "80C claim should be reviewed under the New Tax Regime."
+            );
+        }
+
+
+        if (
+            data.deductions.section80D > 0
+        ) {
+
+            warnings.push(
+                "80D claim should be reviewed under the New Tax Regime."
+            );
+        }
+    }
+
+
+    if (
+        data.hasCapitalGains &&
+        data.hasBusinessIncome
+    ) {
+
+        warnings.push(
+            "Business income plus capital gains requires detailed ITR eligibility verification."
+        );
+    }
+
+
+    let status = "OK";
+
+
+    if (
+        errors.length > 0
+    ) {
+
+        status = "ERROR";
+
+    } else if (
+        warnings.length > 0
+    ) {
+
+        status = "WARNING";
+    }
+
+
+    return {
+
+        status,
+
+        errors,
+
+        warnings,
+
+        message:
+            status === "ERROR"
+                ? "कुछ जरूरी information में error है."
+                : status === "WARNING"
+                    ? "Return में कुछ items review करने की जरूरत है."
+                    : "Basic validation successful."
+    };
+}
+
+
+/* =====================================================
+   GEMINI AI
+===================================================== */
+
+async function requestAI(info) {
+
+    const aiBox =
+        document.getElementById(
+            "aiResult"
         );
 
 
-    let recommendation = "";
-
-
-    if (oldTax < newTax) {
-
-        recommendation =
-            "Old Tax Regime appears lower based on the information entered.";
-
-    }
-
-    else if (newTax < oldTax) {
-
-        recommendation =
-            "New Tax Regime appears lower based on the information entered.";
-
-    }
-
-    else {
-
-        recommendation =
-            "Both regimes have approximately the same estimated tax.";
-
+    if (!aiBox) {
+        return;
     }
 
 
+    const message = `
+You are an Indian income-tax assistant.
 
-    /* ================================
-       DISPLAY RESULT
-    ================================= */
+Assessment Year: 2026-27
 
-    result.style.display = "block";
+Taxpayer:
+Name: ${info.name}
+Age: ${info.age}
+Type: ${info.taxpayerType}
+Residential status: ${info.residentialStatus}
 
+Income:
+Salary: ₹${info.salary}
+Other income: ₹${info.otherIncome}
+House property income: ₹${info.housePropertyIncome}
+Business/profession income: ₹${info.businessIncome}
+STCG: ₹${info.stcg}
+LTCG: ₹${info.ltcg}
 
-    result.innerHTML = `
+Tax calculation:
+Old regime taxable normal income: ₹${info.oldTaxable}
+New regime taxable normal income: ₹${info.newTaxable}
+Old regime estimated tax: ₹${info.oldTax}
+New regime estimated tax: ₹${info.newTax}
 
-        <h2>
-            🧮 Tax Comparison
-        </h2>
+Preliminary ITR: ${info.itr}
 
+Regime recommendation:
+${info.recommendation}
 
-        <div class="info-box">
+Explain the result in simple Hindi.
 
-            <p>
-                <strong>Name:</strong>
-                ${escapeHTML(name)}
-            </p>
+Important:
+- Clearly distinguish estimated computation from final tax liability.
+- Do not invent deductions or exemptions.
+- Mention that capital gains may require separate special-rate computation.
+- Mention surcharge/marginal relief if applicable based on income level.
+- Mention that final ITR applicability must be verified against the current official Income Tax Department utility.
+- Do not claim that this response itself is an official tax filing.
+`;
 
-            <p>
-                <strong>Income Type:</strong>
-                ${escapeHTML(incomeType)}
-            </p>
-
-            <p>
-                <strong>Age:</strong>
-                ${age}
-            </p>
-
-            <p>
-                <strong>Gross Income:</strong>
-                ${money(grossIncome)}
-            </p>
-
-        </div>
-
-
-        <div class="regime-box">
-
-            <h3>
-                🔵 Old Tax Regime
-            </h3>
-
-            <p>
-                Estimated Taxable Income:
-                <strong>
-                    ${money(oldTaxableIncome)}
-                </strong>
-            </p>
-
-            <p class="tax-number">
-                ${money(oldTax)}
-            </p>
-
-            <p>
-                Estimated tax including 4% cess.
-            </p>
-
-        </div>
-
-
-        <div class="regime-box">
-
-            <h3>
-                🟢 New Tax Regime
-            </h3>
-
-            <p>
-                Estimated Taxable Income:
-                <strong>
-                    ${money(newTaxableIncome)}
-                </strong>
-            </p>
-
-            <p class="tax-number">
-                ${money(newTax)}
-            </p>
-
-            <p>
-                Estimated tax including 4% cess.
-            </p>
-
-        </div>
-
-
-        <div class="recommendation">
-
-            💡 Recommendation
-
-            <br><br>
-
-            ${recommendation}
-
-            <br><br>
-
-            Approximate difference:
-            ${money(difference)}
-
-        </div>
-
-
-        <hr>
-
-
-        <h3>
-            🤖 AI Tax Guidance
-        </h3>
-
-
-        <div id="aiResult">
-
-            ⏳ Generating additional guidance...
-
-        </div>
-
-    `;
-
-
-    /*
-       Send information to Gemini
-       only for explanation/guidance.
-    */
 
     try {
 
@@ -930,33 +1828,8 @@ async function calculateTax() {
                     },
 
                     body: JSON.stringify({
-
-                        incomeType:
-                            incomeType,
-
-                        income:
-                            salaryIncome,
-
-                        homeLoan:
-                            homeLoanInterest > 0
-                                ? "Yes"
-                                : "No",
-
-                        insurance:
-                            healthInsurance > 0
-                                ? "Yes"
-                                : "No",
-
-                        investment:
-                            investment80C > 0
-                                ? "Yes"
-                                : "No",
-
-                        otherIncome:
-                            otherIncome
-
+                        message
                     })
-
                 }
             );
 
@@ -971,14 +1844,11 @@ async function calculateTax() {
                 data.error ||
                 "AI request failed."
             );
-
         }
 
 
-        document.getElementById(
-            "aiResult"
-        ).innerHTML =
-            formatResponse(
+        aiBox.innerHTML =
+            formatAI(
                 data.answer
             );
 
@@ -986,30 +1856,27 @@ async function calculateTax() {
 
     catch (error) {
 
-        document.getElementById(
-            "aiResult"
-        ).innerHTML = `
+        aiBox.innerHTML = `
             <p>
-                AI guidance unavailable.
+                ⚠️ AI guidance अभी उपलब्ध नहीं है।
             </p>
+            <small>
+                Tax calculation और ITR preliminary result
+                ऊपर उपलब्ध है।
+            </small>
         `;
-
     }
-
 }
 
 
+/* =====================================================
+   AI FORMAT
+===================================================== */
 
-/* ================================
-   FORMAT AI RESPONSE
-================================ */
-
-function formatResponse(text) {
+function formatAI(text) {
 
     if (!text) {
-
         return "No AI response received.";
-
     }
 
 
@@ -1022,48 +1889,18 @@ function formatResponse(text) {
             /\n/g,
             "<br>"
         );
-
 }
 
 
+/* =====================================================
+   INITIAL UI
+===================================================== */
 
-/* ================================
-   SECURITY
-================================ */
-
-function escapeHTML(text) {
-
-    return String(text)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
-        );
-
-}
+toggleHouseProperty();
+toggleBusiness();
+toggleCapitalGains();
 
 </script>
 
 </body>
-
 </html>
